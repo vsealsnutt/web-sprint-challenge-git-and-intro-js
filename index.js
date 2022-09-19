@@ -208,17 +208,17 @@ Practice accessing data above by console.log-ing following items:
 (no functions needed) */
 
 //(1) Name of the first artist (0th index) in the array
-console.log(artists[0].name);
+console.log('task 1a:', artists[0].name);
 
 
 //(2) Bio of the third artist (2nd index) in the array 
-console.log(artists[2].bio);
+console.log('task 1b:', artists[2].bio);
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2 (not auto tested): 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 (no function needed) 
 There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Fix this issue and console.log() to check your work. */
-console.log(artists[8].name = 'Vincent Van Dough');
+console.log('task 2:', artists[8].name = 'Vincent Van Dough');
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀  
@@ -230,10 +230,10 @@ Use getArtistByIndex to do the following:
 
 🌟 EXAMPLE: if getArtistByIndex is invoked with the artists array and the number 0, it will return `the artist at index 0 is Amedeo Modigliani` */
 
-function getArtistByIndex(array, number) {
-  return `the artist at index ${array[number].id} is ${array[number].name}`;
+function getArtistByIndex(array, index) {
+  return `the artist at index ${array[index].id} is ${array[index].name}`;
 }
-console.log(getArtistByIndex(artists, 0));
+console.log('task 3:', getArtistByIndex(artists, 0));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -246,13 +246,12 @@ Use listOfNames to do the following:
 
 function listOfNames(array) {
   const artistNames = [];
-  for(let i = 0; i < artists.length; i++) {
-    for(let name in artists) {
-      return artistNames.push(array[name]);
-    }
+  for(let i = 0; i < array.length; i++) {
+    artistNames.push(array[i].name);
   }
+  return artistNames;
 }
-console.log(listOfNames(artists));
+console.log('tast 4:', listOfNames(artists));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -264,10 +263,16 @@ Use removeArtist to do the following:
 5. Return the resulting copied array
 🌟 EXAMPLE: if removeArtist is invoked with the artists array and the number 0, it will return the resulting array with Amedeo Modigliani removed from our dataset. */
 
-function removeArtist(array, number) {
-  
+function removeArtist(array, index) {
+  const nineteenArtists = [];
+  for(let i = 0; i < array.length; i++) {
+    if(i !== index) {
+      nineteenArtists.push(array[i]);
+    }
+  }
+  return nineteenArtists;
 }
-
+console.log('task 5:', removeArtist(artists, 0));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -287,9 +292,17 @@ Use addArtist to do the following:
 🌟 EXAMPLE: Invoking addArtist(artists, 'John Doe', '1988-2022', 'Full Stack Development', 'African American', 'I have a background in customer service at Big Retail Chain. I am attending BloomTech to become a Frontend Developer.') should return the artists array with the above object added to the end of the array. */
 
 function addArtist(array, name, years, genre, nationality, bio) {
-  
+ const obj = {
+  'id': 20, 
+  'name': name, 
+  'years': years,
+  'genre': genre, 
+  'nationality': nationality, 
+  'bio': bio,
 }
-
+array.push(obj);
+}
+console.log('task 6:', addArtist(artists, 'Vanessa Seals-Nutt', '1996 - present', 'Web Design', 'American', 'lorem ipsum'));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 7: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -301,9 +314,15 @@ Use lotsOfArt to do the following:
 */
 
 function lotsOfArt(array) {
-  /*Your Code Here*/
+  const mostArt = [];
+  for(let i = 0; i < artists.length; i++) {
+    if(artists[i].paintings > 100) {
+      mostArt.push(artists[i]);
+    }
+  }
+  return mostArt;
 }
-
+console.log('task 7:', lotsOfArt(artists));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 8: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -317,9 +336,11 @@ Use artistInfo to do the following:
 */
 
 function artistInfo(array, name){
-  return 
+  for(let i = 0; i < array.length; i++) {
+    return array[i].bio;
+  }
 }
-
+console.log('task 8:', artistInfo(artists, 'Frida Kahlo'));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 9: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -333,14 +354,13 @@ Use artistByCountry to do the following:
 */
 
 function artistByCountry(array, nationality){
-  const artistByCountry = [];
-  for(let i = 0; i < artists.length; i++) {
-    if(artists[i].nationality === nationality) {
-      return artistByCountry.push(artists[i]);
+  for(let i = 0; i < array.length; i++) {
+    if(array[i].nationality === nationality) {
+      return array;
     }
   }
 }
-console.log(artistByCountry(artists, 'Spanish'));
+console.log('task 9:', artistByCountry(artists, 'Spanish'));
 
 
 /* ***** END OF TASKS ***** */
