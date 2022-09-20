@@ -292,15 +292,19 @@ Use addArtist to do the following:
 🌟 EXAMPLE: Invoking addArtist(artists, 'John Doe', '1988-2022', 'Full Stack Development', 'African American', 'I have a background in customer service at Big Retail Chain. I am attending BloomTech to become a Frontend Developer.') should return the artists array with the above object added to the end of the array. */
 
 function addArtist(array, name, years, genre, nationality, bio) {
- const obj = {
-  'id': 20, 
+  const newArray = [];
+  for(let i = 0; i < array.length; i++) {
+    newArray.push(array[i]);
+  }
+  const obj = { 
   'name': name, 
   'years': years,
   'genre': genre, 
   'nationality': nationality, 
   'bio': bio,
 }
-array.push(obj);
+newArray.push(obj);
+return newArray;
 }
 console.log('task 6:', addArtist(artists, 'Vanessa Seals-Nutt', '1996 - present', 'Web Design', 'American', 'lorem ipsum'));
 
@@ -315,9 +319,9 @@ Use lotsOfArt to do the following:
 
 function lotsOfArt(array) {
   const mostArt = [];
-  for(let i = 0; i < artists.length; i++) {
-    if(artists[i].paintings > 100) {
-      mostArt.push(artists[i]);
+  for(let i = 0; i < array.length; i++) {
+    if(array[i].paintings > 100) {
+      mostArt.push(array[i].name);
     }
   }
   return mostArt;
@@ -337,7 +341,9 @@ Use artistInfo to do the following:
 
 function artistInfo(array, name){
   for(let i = 0; i < array.length; i++) {
-    return array[i].bio;
+    if(array[i].name === name) {
+      return array[i].bio;
+    }
   }
 }
 console.log('task 8:', artistInfo(artists, 'Frida Kahlo'));
@@ -354,11 +360,13 @@ Use artistByCountry to do the following:
 */
 
 function artistByCountry(array, nationality){
+  const artistByCountry = [];
   for(let i = 0; i < array.length; i++) {
     if(array[i].nationality === nationality) {
-      return array;
+      artistByCountry.push(array[i].name);
     }
   }
+  return artistByCountry;
 }
 console.log('task 9:', artistByCountry(artists, 'Spanish'));
 
